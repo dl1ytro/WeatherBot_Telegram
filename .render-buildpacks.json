@@ -1,0 +1,7 @@
+{
+  "buildpacks": [
+    {
+      "url": "https://github.com/render-examples/runtimes/tree/python-3.11"
+    }
+  ]
+}
