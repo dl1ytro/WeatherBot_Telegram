@@ -47,17 +47,28 @@ def webhook():
             return "OK", 200
 
         data_w = r.json()
-        temp = data_w["main"]["temp"]
-        feels = data_w["main"]["feels_like"]
-        desc = data_w["weather"][0]["description"]
 
-        bot.send_message(
-            chat_id,
-            f"Погода в {city}:\n"
-            f"{desc.capitalize()}\n"
-            f"🌡 Температура: {temp}°C\n"
-            f"🤔 Ощущается как: {feels}°C"
+        main = data_w.get("main", {})
+        wind = data_w.get("wind", {})
+
+        temp = main.get("temp")
+        feels = main.get("feels_like")
+        humidity = main.get("humidity")
+        desc = data_w["weather"][0]["description"]
+        wind_speed = wind.get("speed")
+
+        city_title = city.title()
+
+        message_text = (
+            f"☀️ Погода в {city_title} сейчас:\n"
+            f"{desc.capitalize()}\n\n"
+            f"🌡 Температура: {round(temp)}°C\n"
+            f"🤔 Ощущается как: {round(feels)}°C\n"
+            f"💧 Влажность: {humidity}%\n"
+            f"🌬 Ветер: {wind_speed} м/с"
         )
+
+        bot.send_message(chat_id, message_text)
 
     return "OK", 200
 
