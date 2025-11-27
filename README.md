@@ -1,2 +1,2 @@
 # TelegramWeather_bot
-Telegram bot show weather 
+Telegram bot shows weather 
